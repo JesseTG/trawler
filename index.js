@@ -1,9 +1,20 @@
-var filters = {
-	phpFiles: /\.php$/
+const defaultFilters = {
+	phpFiles: /\.php\/?$/i,
+	phpIni: /php\.ini\/?$/i,
+	phpMyAdmin: /phpmyadmin(\/.*)?$/i,
+	aspFiles: /\.aspx?\/?$/i,
+	hnap: /\/HNAP1\/?$/i,
+	git: /\.git(\/.*)?$/i,
+	jsp: /\.jspa?\/?$/i,
+	cfm: /\.cfm\/?$/i,
+	cfide: /\/CFIDE(\/.*)?$/i,
+	action: /\.action\/?$/i,
+	cgi: /\/cgi(-bin)?(\/.*)?$/i,
 };
 
-module.exports = function(target) {
+module.exports = function(target, filters) {
 	target = target || 'http://www.youtube.com/watch?v=oHg5SJYRHA0';
+	filters = filters || defaultFilters;
 
 	return function(req, res, next) {
 		var key;
@@ -21,3 +32,5 @@ module.exports = function(target) {
 		next();
 	};
 };
+
+module.exports.defaultFilters = filters;
